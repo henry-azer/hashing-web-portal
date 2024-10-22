@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SHA-256 Hash | Henry Azer</title>
+    <link rel="icon" href="/resources/favicon.ico">
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -12,15 +13,15 @@
     <div class="container">
         <h1>SHA-256 Hash</h1>
         <div class="form-group">
-            <input type="text" id="inputString" placeholder="Enter your string" oninput="generateHash()">
+            <input type="text" id="inputString" placeholder="String" oninput="generateHash()">
         </div>
         <div class="form-group">
-            <input type="text" id="salt" placeholder="Enter salt" oninput="generateHash()">
+            <input type="text" id="salt" placeholder="Salt" oninput="generateHash()">
         </div>
 
-        <div id="result">
-            <h2>Result</h2>
-            <textarea id="hashedOutput" readonly onclick="copyToClipboard()"></textarea>
+        <div id="toast">Copied!</div>
+        <div id="result" class="form-group">
+            <textarea id="hashedOutput" readonly onclick="copyToClipboard()" placeholder="Result"></textarea>
         </div>
 
         <div class="footer">

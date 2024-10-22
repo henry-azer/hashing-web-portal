@@ -1,35 +1,45 @@
 async function generateHash() {
-    const inputString = document.getElementById('inputString').value;
-    const salt = document.getElementById('salt').value;
-    
-    // If either inputString or salt is empty, clear the output
+    const inputString = document.getElementById("inputString").value;
+    const salt = document.getElementById("salt").value;
+
     if (!inputString || !salt) {
-        document.getElementById('hashedOutput').value = '';
+        document.getElementById("hashedOutput").value = "";
         return;
     }
 
-    // Combine string and salt
     const combined = inputString + salt;
-    
-    // Encode as UTF-8 and hash using SHA-256
+
     const encoder = new TextEncoder();
     const data = encoder.encode(combined);
-    
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    
-    // Convert hash to hex string
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-    // Display the hash in the output area
-    document.getElementById('hashedOutput').value = hashHex;
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+    const hashHex = hashArray
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+
+    document.getElementById("hashedOutput").value = hashHex;
 }
 
 function copyToClipboard() {
-    const hashedOutput = document.getElementById('hashedOutput');
-    
-    // Select and copy the hashed output
-    hashedOutput.select();
-    hashedOutput.setSelectionRange(0, 99999); // For mobile devices
-    document.execCommand("copy");
+    const hashedOutput = document.getElementById("hashedOutput");
+    if (hashedOutput.value.length > 0) {
+        navigator.clipboard
+            .writeText(hashedOutput.value)
+            .then(() => {
+                showToast();
+            })
+            .catch((error) => {
+                console.error("Failed to copy result: ", error);
+            });
+    }
+}
+
+function showToast() {
+    const toast = document.getElementById("toast");
+    toast.classList.add("show");
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2000);
 }

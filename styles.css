@@ -11,11 +11,15 @@ body {
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
     background-color: black;
-    padding: 20px 30px;
+    padding: 25px 30px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
     text-align: center;
+    width: 80%;
+    max-width: 500px;
 }
 
 h1 {
@@ -23,17 +27,23 @@ h1 {
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin: 10px;
 }
 
 input {
     width: 100%;
-    padding: 10px;
-    margin: 5px 0;
+    padding: 20px 15px;
+    color: white;
+    border: none;
+    background-color: #111111;
     box-sizing: border-box;
-    border: 1px solid #000000;
     border-radius: 5px;
     transition: all 0.3s;
+}
+
+input:focus {
+    border: none;
+    outline: none;
 }
 
 #result {
@@ -41,12 +51,14 @@ input {
 }
 
 textarea {
-    height: 100px;
+    height: 140px;
     width: 100%;
     padding: 10px;
     margin: 5px 0;
-    box-sizing: border-box;
+    color: white;
+    background-color: #111111;
     border: 1px solid #000000;
+    box-sizing: border-box;
     border-radius: 5px;
     resize: none;
     cursor: pointer;
@@ -58,5 +70,53 @@ textarea:focus {
 }
 
 .footer p {
-    margin-top: 30px;
+    text-align: center;
+    font-size: 13px;
+}
+
+#toast {
+    visibility: hidden;
+    min-width: 50px;
+    background-color: #4caf50;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    font-size: 13px;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: visibility 0.3s, opacity 0.3s ease-in-out;
+    opacity: 0;
+}
+
+#toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .footer p {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    input, textarea {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
 }
